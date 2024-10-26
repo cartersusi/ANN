@@ -1,7 +1,7 @@
 // +build amd64
 
-// func DotProductFloat32(left, right []float32, result float32) float32
-TEXT ·DotProductFloat32(SB), 4, $0
+// func DotProduct(left, right []float32, result float32) float32
+TEXT ·DotProduct(SB), 4, $0
     // Load slice lengths
     MOVQ    leftLen+8(FP), AX
     MOVQ    rightLen+32(FP), BX

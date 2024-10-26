@@ -9,6 +9,6 @@ func Supported() bool
 
 //func DivFloat32(left, right, result []float32) int
 
-func DotProductFloat32(left, right []float32, result float32) float32
+func DotProduct(left, right []float32, result float32) float32
 
 //func SubFloat32(left, right, result []float32) int

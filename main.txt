@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"go-ann/ann"
+	"github.com/cartersusi/ann/go-ann"
 )
 
 func main() {
@@ -31,7 +31,7 @@ func main() {
 	k := 3
 	recall_target := 0.95
 
-	ann.CheckEinsum(qy, db, dim*n)
+	ann.CheckEinsumARM(qy, db, dim*n)
 
 	start_time := time.Now()
 	ids, dists := ann.Auto(qy, db, db_half_norm, k, recall_target)
