@@ -1,0 +1,56 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+
+	"go-ann/ann"
+)
+
+func main() {
+	// 1000 Page PDF
+	n := 1000
+	dim := 2048
+
+	db := make([][]float32, n)
+	for i := 0; i < n; i++ {
+		db[i] = make([]float32, dim)
+		for j := 0; j < dim; j++ {
+			db[i][j] = rand.Float32()
+		}
+	}
+
+	db_half_norm := Halfnorm(db)
+
+	qy := make([]float32, dim)
+	for i := 0; i < dim; i++ {
+		qy[i] = rand.Float32()
+	}
+
+	k := 3
+	recall_target := 0.95
+
+	ann.CheckEinsum(qy, db, dim*n)
+
+	start_time := time.Now()
+	ids, dists := ann.Auto(qy, db, db_half_norm, k, recall_target)
+	fmt.Println("Time taken:", time.Since(start_time))
+	fmt.Println(ids, dists)
+
+}
+
+func Halfnorm(matrix [][]float32) []float32 {
+	n := len(matrix)
+	halfnorm := make([]float32, n)
+
+	for i := 0; i < n; i++ {
+		sum_squares := float32(0)
+		for _, v := range matrix[i] {
+			sum_squares += v * v
+		}
+		halfnorm[i] = sum_squares / 2
+	}
+
+	return halfnorm
+}
