@@ -1,3 +1,3 @@
-module github/cartersusi/go-ann
+module github/cartersusi/ann
 
-go 1.23.2
+go 1.23.1
